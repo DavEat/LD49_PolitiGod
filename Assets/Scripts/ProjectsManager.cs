@@ -23,8 +23,9 @@ public class ProjectsManager : MonoBehaviour
         int cost = 1000;
 
         if (!CanPurchase(cost)) return;
+        FinancesManager.inst.BuyStuff(cost);
 
-        int boostOne = 20;
+        int boostOne = -20;
         int boostTwo = 15;
 
         int boostOneDur = -1;
@@ -44,6 +45,7 @@ public class ProjectsManager : MonoBehaviour
         int cost = 1000;
 
         if (!CanPurchase(cost)) return;
+        FinancesManager.inst.BuyStuff(cost);
 
         int boostOne = 10;
         int boostTwo = 5;
@@ -65,8 +67,9 @@ public class ProjectsManager : MonoBehaviour
         int cost = 1000;
 
         if (!CanPurchase(cost)) return;
+        FinancesManager.inst.BuyStuff(cost);
 
-        int boostOne = 2;
+        int boostOne = -2;
         int boostTwo = 8;
 
         int boostOneDur = -1;
@@ -86,8 +89,9 @@ public class ProjectsManager : MonoBehaviour
         int cost = 1000;
 
         if (!CanPurchase(cost)) return;
+        FinancesManager.inst.BuyStuff(cost);
 
-        int boostOne = 2;
+        int boostOne = -2;
         int boostTwo = 5;
 
         int boostOneDur = -1;
@@ -107,6 +111,7 @@ public class ProjectsManager : MonoBehaviour
         int cost = 1000;
 
         if (!CanPurchase(cost)) return;
+        FinancesManager.inst.BuyStuff(cost);
 
         FinancesManager.inst.haveChurch = true;
     }
@@ -115,14 +120,16 @@ public class ProjectsManager : MonoBehaviour
         int cost = 1000;
 
         if (!CanPurchase(cost)) return;
+        FinancesManager.inst.BuyStuff(cost);
 
-        
+
     }
     public void Purchase_PoliticalMeeting()
     {
-        int cost = 1000;
+        int cost = 300;
 
         if (!CanPurchase(cost)) return;
+        FinancesManager.inst.BuyStuff(cost);
 
         int boostOne = 10;
 
@@ -135,17 +142,19 @@ public class ProjectsManager : MonoBehaviour
     }
     public void Purchase_Propaganda()
     {
-        int cost = 1000;
+        int cost = 200;
 
         if (!CanPurchase(cost)) return;
+        FinancesManager.inst.BuyStuff(cost);
 
         InfosManager.inst.doingPropaganda = true;
     }
     public void Stop_Propaganda()
     {
-        int cost = 0;
-
-        if (!CanPurchase(cost)) return;
+        //int cost = 0;
+        //
+        //if (!CanPurchase(cost)) return;
+        //FinancesManager.inst.BuyStuff(cost);
 
         InfosManager.inst.doingPropaganda = false;
     }
@@ -154,6 +163,7 @@ public class ProjectsManager : MonoBehaviour
         int cost = 1000;
 
         if (!CanPurchase(cost)) return;
+        FinancesManager.inst.BuyStuff(cost);
 
         int boostOne = 15;
 

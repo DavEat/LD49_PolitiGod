@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -15,6 +16,13 @@ public class GameManager : Singleton<GameManager>
     int m_numberOfCycles = 1;
     public int numberOfCycles => m_numberOfCycles;
 
+    bool m_paused = false;
+
+    bool m_have_banckrupt = false;
+    bool m_have_loseElection = false;
+    bool m_lost = false;
+    bool m_reload = false;
+
     void Start()
     {
         m_educationDay = m_electionEvery / 4;
@@ -22,6 +30,20 @@ public class GameManager : Singleton<GameManager>
 
     void FixedUpdate()
     {
+        if (m_lost)
+        {
+            if (!m_reload)
+            {
+                m_reload = true;
+                Events.EventManager.inst.End();
+            }
+            else if (m_reload)
+            {
+                SceneManager.LoadScene(0);
+            }
+            return;
+        }
+
         if (m_time < Time.time)
         {
             m_time = Time.time + m_dayTime;
@@ -41,8 +63,54 @@ public class GameManager : Singleton<GameManager>
         if (m_numberOfCycles % m_electionEvery == 0)
         {
             Debug.Log("election day");
+            Election();
         }
 
         tick(m_numberOfCycles);
+
+        Banckrupt();
+    }
+
+    public void SetPaused(bool pause)
+    {
+        m_paused = pause;
+        Time.timeScale = m_paused ? 0 : 1;
+    }
+
+    void Banckrupt()
+    {
+        if (FinancesManager.inst.balance < -100)
+        {
+            if (!m_have_banckrupt)
+            {
+                m_have_banckrupt = true;
+                Events.EventManager.inst.LoseMoneyFirst();
+            }
+            else
+            {
+                m_lost = true;
+                Events.EventManager.inst.LoseMoney();
+            }
+        }
+    }
+    void Election()
+    {
+        if (InfosManager.inst.m_approbation < 50)
+        {
+            if (!m_have_loseElection)
+            {
+                m_have_loseElection = true;
+                Events.EventManager.inst.LoseElectionFirst();
+            }
+            else
+            {
+                m_lost = true;
+                Events.EventManager.inst.LoseElection();
+            }
+        }
+        else
+        {
+            Events.EventManager.inst.WinElection();
+        }
     }
 }

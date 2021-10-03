@@ -96,7 +96,7 @@ public class InfosManager : Singleton<InfosManager>
         m_text_electionIn.text = remainingdays.ToString();
         m_slider_electionIn.value = 1 - remainingdays / (float)GameManager.inst.electionEvery;
 
-        m_approvalText.text = m_approbation.ToString() + "%";
+        m_approvalText.text = m_approbation + "%";
     }
 
     void UpdateStats()
@@ -155,6 +155,8 @@ public class InfosManager : Singleton<InfosManager>
         m_approbation = (int)((m_happiness / (float)m_max_happiness) * 100) - (int)((m_demonstration / (float)m_max_demonstration) * 50);
         m_demonstration += doingPropaganda ? 15 : 0;
         m_approbation += m_approbation_modifier;
+
+        m_floodChance = 10 + m_floodChance_modifier;
     }
 
     public void SetEvacuated(bool value)

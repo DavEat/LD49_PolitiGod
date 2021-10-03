@@ -85,7 +85,7 @@ namespace Events
         public Effect(int startTime, int duration, Dictionary<EffectOn, int> effect, Action result = null)
         {
             this.startTime = startTime;
-            this.endTime = startTime + duration;
+            this.endTime = duration == -1 ? -1 : startTime + duration;
             this.effect = effect;
             this.result = result;
         }

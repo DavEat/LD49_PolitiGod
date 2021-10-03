@@ -10,6 +10,7 @@ public class FinancesManager : Singleton<FinancesManager>
     public int balance => m_balance;
     [SerializeField] string m_balanceUnit = "h";
     [SerializeField] TextMeshProUGUI m_balanceText;
+    [SerializeField] Transform m_balanceArrow;
 
     //ins
     short m_worshipTime;
@@ -49,11 +50,23 @@ public class FinancesManager : Singleton<FinancesManager>
         if (InfosManager.inst.evacuated) ins = 0;
         if (InfosManager.inst.confined) ins = Mathf.FloorToInt(ins * .5f);
 
-        m_balance += ins - outs;
-        m_balance += haveChurch ? 3 : 0;
+        int newCash = ins - outs;
+        newCash += haveChurch ? 3 : 0;
+
+        m_balance += newCash;
 
         if (m_balanceText != null)
             m_balanceText.text = m_balance + m_balanceUnit;
+
+        if (m_balanceArrow != null)
+        {
+            if (newCash == 0)
+                m_balanceArrow.eulerAngles = Vector3.forward * -90;
+            else if (newCash < 0)
+                m_balanceArrow.eulerAngles = Vector3.forward * 180;
+            else if (newCash > 0)
+                m_balanceArrow.eulerAngles = Vector3.zero;
+        }
     }
     public void UpdateWorshipTime(Slider value)
     {
@@ -114,5 +127,9 @@ public class FinancesManager : Singleton<FinancesManager>
     public void BuyStuff(int cost)
     {
         m_balance -= cost;
+    }
+    public void FreeeMoeny(int amount)
+    {
+        m_balance += amount;
     }
 }

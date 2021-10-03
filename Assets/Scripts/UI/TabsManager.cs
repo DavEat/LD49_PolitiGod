@@ -27,4 +27,9 @@ public class TabsManager : MonoBehaviour
         TaxesPanel.SetActive(false);
         ProjectsPanel.SetActive(true);
     }
+
+    void Start()
+    {
+        ClickInfos();        
+    }
 }
