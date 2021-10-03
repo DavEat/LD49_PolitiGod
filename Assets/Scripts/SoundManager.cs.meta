@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 9ecb0d565a168304db7eab062342aa98
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_source: {instanceID: 0}
+  - click0: {instanceID: 0}
+  - click1: {instanceID: 0}
+  - elected0: {fileID: 8300000, guid: 4e9c36ad90928024290c595ff744b5fb, type: 3}
+  - event0: {fileID: 8300000, guid: f349265818c2dba4ca4d919dfa8de029, type: 3}
+  - buy0: {fileID: 8300000, guid: 7fa69711dc8c1ab41afc27d38e06f5af, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
