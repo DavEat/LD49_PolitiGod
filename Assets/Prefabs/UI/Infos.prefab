@@ -2503,7 +2503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94dc440f4341dc542b319d824e4b741c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_aprobation: 51
+  m_approbation: 51
   m_happiness: 50
   m_education: 50
   m_crimerate: 11
@@ -2511,6 +2511,7 @@ MonoBehaviour:
   m_floodChance: 10
   m_healthCrisis: 10
   m_demonstration: 11
+  m_approvalText: {fileID: 0}
   m_text_electionIn: {fileID: 7521731810527235045}
   m_slider_electionIn: {fileID: 7162309509300676511}
   m_slider_happiness: {fileID: 3701578915012864518}
@@ -3210,9 +3211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1312684718216079247, guid: fe9b47063bea4fd44be9a897ef486728, type: 3}
       propertyPath: m_text
-      value: 'Demonstration
-
-        Chances'
+      value: Protest Chances
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe9b47063bea4fd44be9a897ef486728, type: 3}

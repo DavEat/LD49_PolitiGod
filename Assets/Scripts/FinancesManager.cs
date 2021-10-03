@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class FinancesManager : Singleton<FinancesManager>
 {
     [SerializeField] int m_balance;
+    public int balance => m_balance;
     [SerializeField] string m_balanceUnit = "h";
     [SerializeField] TextMeshProUGUI m_balanceText;
 
@@ -19,6 +20,8 @@ public class FinancesManager : Singleton<FinancesManager>
     short m_subsTransport;
     short m_subsHeath;
     short m_subsPolice;
+
+    [HideInInspector] public bool haveChurch = false;
 
     //ins
     public short worshipTime => m_worshipTime;
@@ -47,6 +50,7 @@ public class FinancesManager : Singleton<FinancesManager>
         if (InfosManager.inst.confined) ins = Mathf.FloorToInt(ins * .5f);
 
         m_balance += ins - outs;
+        m_balance += haveChurch ? 3 : 0;
 
         if (m_balanceText != null)
             m_balanceText.text = m_balance + m_balanceUnit;
@@ -105,5 +109,10 @@ public class FinancesManager : Singleton<FinancesManager>
     {
         Events.Effect effTwo = new Events.Effect(GameManager.inst.numberOfCycles, delay,
             new Dictionary<Events.EffectOn, int>() { { Events.EffectOn.happiness, happy }, { Events.EffectOn.approbation, approb } });
+    }
+
+    public void BuyStuff(int cost)
+    {
+        m_balance -= cost;
     }
 }
