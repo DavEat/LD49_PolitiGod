@@ -47,6 +47,27 @@ namespace Events
                     new Effect(GameManager.inst.numberOfCycles, 20, new Dictionary<EffectOn, int>() { { EffectOn.happiness, -1 } })
                 );
             }
+            else if (cycleNumber == 170)
+            {
+                SoundManager.inst.PlayEvent0();
+                EventTab.inst.ShowEvent("A Prophet ?", "Man is speaking on the town square saying that he talk in the name of the ruling god, the problem is that you don't know and have ever speak with him.\nOne of your council member is sugesting to strike him down.",
+                    new Effect(GameManager.inst.numberOfCycles + 5, 30, new Dictionary<EffectOn, int>() { { EffectOn.approbation, 10 }, { EffectOn.crime, -10 } },
+                        new Action(() => {
+                            SoundManager.inst.PlayEvent0();
+                            EventTab.inst.ShowEvent("Where are holy men", "Since you strike down that false prophet a lot of holy men have descided that they better no speak in the name of something they dont understand.\nThe problem is that we may miss a bit the peoples fervor."
+                            );
+                        })
+                    ),
+                    new Effect(GameManager.inst.numberOfCycles, 10, new Dictionary<EffectOn, int>() { { EffectOn.demonstration, 20 } },
+                        new Action(() => {
+                            SoundManager.inst.PlayEvent0();
+                            EventTab.inst.ShowEvent("But it's just a man", "The false prophet have continued to speak to the people and some how he manage to for a crownn, which is holding grudge against me for some unknown reason.",
+                                new Effect(GameManager.inst.numberOfCycles, 40, new Dictionary<EffectOn, int>() { { EffectOn.demonstration, 50 } })
+                            );
+                        })
+                    )
+                );
+            }
         }
 
         public void WinElection()
@@ -76,6 +97,11 @@ namespace Events
         {
             SoundManager.inst.PlayLoseElected0();
             EventTab.inst.ShowEvent("Ho no Bankrupt again !", "Big god is more Angry god right now, you lost all is moeny twice !\nYour good to return working as filthy human on earth now\nByyye !");
+        }
+        public void LoseCrowd()
+        {
+            SoundManager.inst.PlayLoseElected0();
+            EventTab.inst.ShowEvent("Over throne !", "A big angry crowd dreaming of a better futur, strom trough our office an put an end to your tyrannical reign !");
         }
         public void End()
         {

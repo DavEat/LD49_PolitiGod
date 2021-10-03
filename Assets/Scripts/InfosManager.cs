@@ -16,7 +16,7 @@ public class InfosManager : Singleton<InfosManager>
 
     [HideInInspector] public int m_floodChance = 10;
     [HideInInspector] public int m_healthCrisis = 10;
-    [HideInInspector] public int m_demonstration = 11;
+    public int m_demonstration = 11;
 
     [HideInInspector] public bool doingPropaganda = false;
 
@@ -146,14 +146,14 @@ public class InfosManager : Singleton<InfosManager>
         m_healthCrisis = (m_max_healthCrisis / 2) - FinancesManager.inst.subsHeath; //max 80
         m_healthCrisis += m_healthCrisis_modifier;
 
-        m_demonstration = Mathf.FloorToInt((((m_poverty / (float)m_max_poverty) + (m_happiness / (float)m_max_happiness)) - (FinancesManager.inst.subsPolice / 6f)) * 100);
+        m_demonstration = Mathf.FloorToInt((((m_poverty / (float)m_max_poverty) + (.5f - (m_happiness / (float)m_max_happiness))*.5f) - (FinancesManager.inst.subsPolice / 6f)) * 100);
         if (!m_canProtest)
-            m_demonstration += 10;
-        m_demonstration += doingPropaganda ? -10 : 0;
+            m_demonstration += -10;
+        m_demonstration += doingPropaganda ? 10 : 0;
         m_demonstration += m_demonstration_modifier;
 
         m_approbation = (int)((m_happiness / (float)m_max_happiness) * 100) - (int)((m_demonstration / (float)m_max_demonstration) * 50);
-        m_demonstration += doingPropaganda ? 15 : 0;
+        m_approbation += doingPropaganda ? 15 : 0;
         m_approbation += m_approbation_modifier;
 
         m_floodChance = 10 + m_floodChance_modifier;

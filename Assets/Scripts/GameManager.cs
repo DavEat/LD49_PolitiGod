@@ -69,6 +69,7 @@ public class GameManager : Singleton<GameManager>
         tick(m_numberOfCycles);
 
         Banckrupt();
+        Crowd();
     }
 
     public void SetPaused(bool pause)
@@ -111,6 +112,14 @@ public class GameManager : Singleton<GameManager>
         else
         {
             Events.EventManager.inst.WinElection();
+        }
+    }
+    void Crowd()
+    {
+        if (InfosManager.inst.m_demonstration > 110 && InfosManager.inst.m_approbation < 30)
+        {
+            m_lost = true;
+            Events.EventManager.inst.LoseCrowd();
         }
     }
 }
