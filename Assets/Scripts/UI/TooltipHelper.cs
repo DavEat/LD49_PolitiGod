@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class TooltipHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [TextArea]
     [SerializeField] string m_details = "default details";
 
     Transform m_transform;
