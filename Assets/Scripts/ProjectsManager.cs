@@ -1,9 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ProjectsManager : MonoBehaviour
 {
+    [SerializeField] GameObject m_hospital;
+    [SerializeField] GameObject m_school;
+    [SerializeField] GameObject m_police;
+    [SerializeField] GameObject m_fire;
+    [SerializeField] GameObject m_church;
+    [SerializeField] GameObject m_transport;
+
+    [SerializeField] Button m_button_hospital;
+    [SerializeField] Button m_button_school;
+    [SerializeField] Button m_button_police;
+    [SerializeField] Button m_button_fire;
+    [SerializeField] Button m_button_church;
+    [SerializeField] Button m_button_transport;
+
+    [SerializeField] Button m_button_meeting;
+
     void Start()
     {
         GameManager.inst.tick += OnTick;
@@ -39,6 +56,9 @@ public class ProjectsManager : MonoBehaviour
 
         Events.EffectManager.inst.AddEffect(effPerm);
         Events.EffectManager.inst.AddEffect(effShort);
+
+        if (m_button_hospital) m_button_hospital.interactable = false;
+        m_hospital?.SetActive(true);
     }
     public void Purchase_School()
     {
@@ -61,6 +81,9 @@ public class ProjectsManager : MonoBehaviour
 
         Events.EffectManager.inst.AddEffect(effPerm);
         Events.EffectManager.inst.AddEffect(effShort);
+
+        if (m_button_school) m_button_school.interactable = false;
+        m_school?.SetActive(true);
     }
     public void Purchase_Police()
     {
@@ -83,6 +106,9 @@ public class ProjectsManager : MonoBehaviour
 
         Events.EffectManager.inst.AddEffect(effPerm);
         Events.EffectManager.inst.AddEffect(effShort);
+
+        if (m_button_police) m_button_police.interactable = false;
+        m_police?.SetActive(true);
     }
     public void Purchase_FireStation()
     {
@@ -105,6 +131,9 @@ public class ProjectsManager : MonoBehaviour
 
         Events.EffectManager.inst.AddEffect(effPerm);
         Events.EffectManager.inst.AddEffect(effShort);
+
+        if (m_button_fire) m_button_fire.interactable = false;
+        m_fire?.SetActive(true);
     }
     public void Purchase_Church()
     {
@@ -114,6 +143,9 @@ public class ProjectsManager : MonoBehaviour
         FinancesManager.inst.BuyStuff(cost);
 
         FinancesManager.inst.haveChurch = true;
+
+        if (m_button_church) m_button_church.interactable = false;
+        m_church?.SetActive(true);
     }
     public void Purchase_Media()
     {
@@ -136,9 +168,12 @@ public class ProjectsManager : MonoBehaviour
         int boostOneDur = GameManager.inst.electionEvery / 2;
 
         Events.Effect effPerm = new Events.Effect(GameManager.inst.numberOfCycles, boostOneDur,
-            new Dictionary<Events.EffectOn, int>() { { Events.EffectOn.approbation, boostOne } });
+            new Dictionary<Events.EffectOn, int>() { { Events.EffectOn.approbation, boostOne } },
+            new System.Action(() => { if (m_button_meeting) m_button_meeting.interactable = true; }));
 
         Events.EffectManager.inst.AddEffect(effPerm);
+
+        if (m_button_meeting) m_button_meeting.interactable = false;
     }
     public void Purchase_Propaganda()
     {
@@ -173,5 +208,8 @@ public class ProjectsManager : MonoBehaviour
             new Dictionary<Events.EffectOn, int>() { { Events.EffectOn.happiness, boostOne } });
 
         Events.EffectManager.inst.AddEffect(effPerm);
+
+        if (m_button_transport) m_button_transport.interactable = false;
+        m_transport?.SetActive(true);
     }
 }
