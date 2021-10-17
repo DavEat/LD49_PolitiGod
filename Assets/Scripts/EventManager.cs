@@ -103,10 +103,25 @@ namespace Events
             SoundManager.inst.PlayLoseElected0();
             EventTab.inst.ShowEvent("Over throne !", "A big angry crowd dreaming of a better futur, strom trough our office an put an end to your tyrannical reign !");
         }
+        public void WinElectionFinal()
+        {
+            SoundManager.inst.PlayLoseElected0();
+            EventTab.inst.ShowEvent("Needed by the people !", "Congratulation you manager to stay in office for a long time, your are very old and do not undustrand the changes of the world but it does not prevent you to continuing ruling as long as you earn money for the Big god.",
+                new Effect(GameManager.inst.numberOfCycles, 1, new Dictionary<EffectOn, int>(), () => EndW())
+            );
+        }
         public void End()
         {
             SoundManager.inst.PlayElected0();
             EventTab.inst.ShowEvent("Thanks you !", "Thanks you for playing !\nGame Made by Nakami\nin 30 hours for the Ludum Dare 49");
+        }
+        public void EndW()
+        {
+            SoundManager.inst.PlayElected0();
+            EventTab.inst.ShowEvent("Thanks you !", "Thanks you for playing !\nGame Made by Nakami\nin 30 hours for the Ludum Dare 49\n\nYou can continue playing the game but nothing new will happend\n\nDo you want to restart from the start ?",
+                new Effect(GameManager.inst.numberOfCycles, 1, new Dictionary<EffectOn, int>(), () => SceneManager.LoadScene(0)),
+                new Effect(GameManager.inst.numberOfCycles, 1, new Dictionary<EffectOn, int>())
+            );
         }
     }
 }

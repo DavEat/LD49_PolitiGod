@@ -16,6 +16,9 @@ public class GameManager : Singleton<GameManager>
     int m_numberOfCycles = 1;
     public int numberOfCycles => m_numberOfCycles;
 
+    [SerializeField] int m_afterNElection = 5;
+    int m_electionsWon;
+
     bool m_paused = false;
 
     bool m_have_banckrupt = false;
@@ -63,7 +66,15 @@ public class GameManager : Singleton<GameManager>
         if (m_numberOfCycles % m_electionEvery == 0)
         {
             Debug.Log("election day");
-            Election();
+            m_electionsWon++;
+            if (m_electionsWon == m_afterNElection)
+            {
+                Events.EventManager.inst.WinElectionFinal();
+            }
+            else
+            {
+                Election();
+            }
         }
 
         tick(m_numberOfCycles);
